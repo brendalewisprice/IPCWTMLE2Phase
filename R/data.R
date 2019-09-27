@@ -1,4 +1,4 @@
-#' Simulated CYD14 two-phase data set
+#' Simulated CYD14 Two-Phase Data Set
 #'
 #' Data simulated to mimic the CYD14 Tetravalent Dengue Vaccine Trial conducted by Sanofi-Pasteur
 #'
@@ -34,7 +34,7 @@
 "simCYD14_twostage"
 
 
-#' Simulated CYD15 two-phase data set
+#' Simulated CYD15 Two-Phase Data Set
 #'
 #' Data simulated to mimic the CYD15 Tetravalent Dengue Vaccine Trial conducted by Sanofi-Pasteur
 #'
