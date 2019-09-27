@@ -33,6 +33,8 @@ IPCW-TMLE estimates of $\Psi_1$, $\Psi_0$, and $\theta$ are obtained using the m
 
 ## First, load and prepare the data
 
+The two simulated data sets are included in the package.
+
 ```{r data_read_in, echo=FALSE}
 # Load the data sets available in the package IPCWTMLE
 load("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/data/simCYD14_twostage.RData")
