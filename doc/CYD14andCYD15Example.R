@@ -80,8 +80,8 @@ dat$S <- dat$VACC + 1
 dat.2 <- dat[dat$delta==1,]
 tps.fit <- tps(fmla, data=dat.2, nn0=nn0, nn1=nn1, group=dat.2$VACC, method="ML")
   
-## output the corresponding estimates for the BH approach
+## Run the package function to output the corresponding estimates for the BH approach
 out.BH <- BH.Estimates(fmla=fmla,dat=dat,tps.fit=tps.fit)
-
+## Print the corresponding estimates for the BH approach
 out.BH
 
