@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary
 
-This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach in @Price2020.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.
+This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach presented in @RosevanderLaan2011 and demonstrated in @Price2020.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated (@BreslowHul1997).
 
 ## Introduction
 ## Data set
