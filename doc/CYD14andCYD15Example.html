@@ -97,7 +97,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine. For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.</p>
+<p>This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach in <span class="citation">Price (2019)</span>. For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.</p>
 </div>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
@@ -162,9 +162,9 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;Risk Difference: &quot;</span>,<span class="kw">round</span>(out$est.RiskDiff,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.RiskDiff[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.RiskDiff[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Risk Difference: -0.027; 95% CI: (-0.033,-0.022)&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;RR: &quot;</span>,<span class="kw">round</span>(out$est.RR,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.rr[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.rr[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;RR: 0.278; 95% CI: (0.186,0.417)&quot;</code></pre>
+<pre><code>## [1] &quot;RR: 0.28; 95% CI: (0.186,0.42)&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;OR: &quot;</span>,<span class="kw">round</span>(out$est.OR,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.OR[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.OR[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;OR: 0.378; 95% CI: (0.251,0.57)&quot;</code></pre>
+<pre><code>## [1] &quot;OR: 0.381; 95% CI: (0.252,0.575)&quot;</code></pre>
 <p>If only the IPCW-TMLE of the predicted values are desired, the <em>weighted.tmle.predicted.values</em> function can be used:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out.fitted &lt;-<span class="st"> </span><span class="kw">weighted.tmle.predicted.values</span>(<span class="dt">w=</span>dat[,SL.W], 
                        <span class="dt">a=</span>dat$A, 
@@ -176,7 +176,7 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
                        <span class="dt">max.wgt =</span> <span class="ot">Inf</span>)</code></pre></div>
 <p>The resulting “fitted.values” are the IPCW-TMLE fitted values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(out.fitted$fitted.values)</code></pre></div>
-<pre><code>[1] 0.05138581 0.01852868 0.04197015 0.06334470 0.06612285 0.04278004</code></pre>
+<pre><code>[1] 0.05147844 0.01871641 0.04209155 0.06339900 0.06616798 0.04289901</code></pre>
 </div>
 </div>
 <div id="breslow-holubkov-estimation-for-comparison" class="section level2">
@@ -232,8 +232,16 @@ $OR
 $ci.OR
 [1] 0.1806040 0.2955412</code></pre>
 </div>
-<div id="the-end" class="section level2">
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="the-end" class="section level2 unnumbered">
 <h2>The end</h2>
+<div id="refs" class="references">
+<div id="ref-Price2019">
+<p>Price, Brenda. 2019. “Comparing Targeted Minimum Loss-Based and Breslow-Holubkov Methodology for Two-Phase Sampling Data Designs.” <em>Statistical Communications in Infectious Diseases</em> 99 (x). De Gruyater: x–x. doi:<a href="https://doi.org/unknown">unknown</a>.</p>
+</div>
+</div>
+</div>
 </div>
 
 

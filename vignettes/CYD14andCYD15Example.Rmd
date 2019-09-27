@@ -7,6 +7,26 @@ vignette: >
   %\VignetteIndexEntry{IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
+  
+references:
+- id: Price2019
+  title: Comparing targeted minimum loss-based and Breslow-Holubkov methodology for two-phase sampling data designs
+  author:
+  - family: Price
+    given: Brenda
+  container-title: Statistical Communications in Infectious Diseases
+  volume: 99
+  URL: 'http://unknown'
+  DOI: unknown
+  issue: x
+  publisher: De Gruyater
+  page: x-x
+  type: article-journal
+  issued:
+    year: 2019
+    month: 12  
+    
+
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary
 
-This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.
+This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach in @Price2019.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.
 
 ## Introduction
 ## Data set
@@ -157,5 +177,6 @@ out.BH
 ```
 
 
+# References
 
 ## The end
