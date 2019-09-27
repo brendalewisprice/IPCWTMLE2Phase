@@ -3,7 +3,7 @@
 \docType{data}
 \name{simCYD14_twostage}
 \alias{simCYD14_twostage}
-\title{Simulated CYD14 two-phase data set}
+\title{Simulated CYD14 Two-Phase Data Set}
 \format{A data frame simulated to mimic a phase 3 dengue vaccine efficacy trial with 10250 rows and the following 40 variables:
 \describe{
   \item{X}{Row number}
