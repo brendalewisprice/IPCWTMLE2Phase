@@ -1,6 +1,7 @@
 ---
 title: "IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data"
 author: "Brenda Price"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data}
