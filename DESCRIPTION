@@ -1,0 +1,13 @@
+Package: IPCWTMLE2Phase
+Type: Package
+Title: Inverse Probability of Censoring Weighted Targeted Minimum Loss-based Estimation for Two-Phase STudies
+Version: 0.1.0
+Author: Brenda Price
+Maintainer: Brenda Price <blp7@uw.edu>
+Description: This package provides estimates of the additive marginal treatment effect, marginal relative risk, and marginal odds ratios for second phase data from a two-phase data structure.
+License: none
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr

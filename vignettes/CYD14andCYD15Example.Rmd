@@ -1,0 +1,158 @@
+---
+title: "IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data"
+author: "Brenda Price"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summary
+
+This vignette will demonstrate the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine.  The outcome for this clinical trial was virally confirmed dengue (VCD), coded as 1 for VCD and 0 otherwise.  Covariates adjusted for for will include age, gender, and country.  The phase two sample was taken as a stratified sample based on outcome (VCD or no-VCD) and vaccination status (vaccine or placebo).  Individual observation level weights reflect the probability of sampling to phase two.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.  
+
+## Introduction
+## Data set
+Two randomized, double-blinded, placebo-controlled, multicenter, Phase 3 trials of the identical recombinant, live, attenuated, tetravalent dengue vaccine (CYD-TDV) versus placebo were conducted in Asia (Capeding et al. (2014)\nocite{Capedingetal2014}) and Latin America (Villar et al. (2015)\nocite{Villaretal2015}). These trials--labeled CYD14 and CYD15--randomized 10,275 and 20,869 children, respectively, in 2:1 allocation to vaccine:placebo, with immunizations administered at months 0, 6, and 12.  The primary analyses assessed vaccine efficacy ($VE$) against symptomatic, virologically confirmed dengue (VCD) occurring at least 28 days after the third immunization through to the Month 25 visit. Based on a proportional hazards model, estimated $VE$ was 56.5\% (95\% CI 43.8--66.4) for CYD14 and 64.7\% (95\% CI 58.7--69.8) for CYD15.
+
+The trials measured neutralizing antibody titers to each of the four dengue serotypes contained in the CYD-TDV vaccine at baseline and at Month 13. These titers were measured via case-cohort sampling performed as Bernoulli random samples of all randomized participants at enrollment and additionally from all participants who experienced the VCD endpoint after Month 13 and by Month 25 (cases).  An individual's Month 13 log10-transformed geometric mean titer to the four vaccine-strain serotypes (``M13 average titer") has been studied as a biomarker of dengue risk and vaccine efficacy in secondary analyses (Vigne et al. (2017)\nocite{Vigne2017}, Moodie et al. (2018)\nocite{Moodieetal2018}, Sridhar et al. (2018)\nocite{Sridhar2018}), and for this example we study this marker as our phase 2 variable of interest. 
+
+## Simulated Data Sets
+For this Vignette, we will not use the actual data from these vaccine trials, but data that has been simulated to be similar in distribution to the actual vaccine trial data.  These data sets are included in this package under the names "simCYD14_twostage.RData" and "simCYD15_twostage.RData".  For this analysis, we will combine the data sets.
+
+### Analysis Approach
+We apply IPCW-TMLE methodology to assess the association of M13 average titer with the subsequent risk of VCD through Month 25 (variable "VCD"). We investigate how the risk of VCD compares between vaccine recipients with above median versus below median values of M13 average titer ("M13_PRNT_SeroAverage"), coded below as $A=1$ and $A=0$ respectively. Our parameters of interest are the two marginalized risks $\Psi_1 = E[E(Y=1|A=1,X)]$ and $\Psi_0 = E[E(Y=1|A=0,X)]$, where $X$ represents the phase 1 baseline covariates 
+age, gender, and country of origin.   We also are interested in specified contrasts $\theta = h(\Psi_1,\Psi_0)$ such as the marginalized risk difference ($\theta =\Psi_1-\Psi_0$), the relative marginalized risk $\theta = \Psi_1 / \Psi_0$, the relative marginalized odds ratio $\theta = \Psi_1/(1-\Psi_1) / \Psi_0/(1-\Psi_0)$, 
+
+IPCW-TMLE estimates of $\Psi_1$, $\Psi_0$, and $\theta$ are obtained using the methods described in Price and Gilbert (2020), and Breslow-Holubkov estimates are obtained using the "tps" function from the package \textit{osDesign}.
+
+## First, load and prepare the data
+
+```{r data_read_in, echo=FALSE}
+# Load the data sets available in the package IPCWTMLE
+load("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/data/simCYD14_twostage.RData")
+load("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/data/simCYD15_twostage.RData")
+source("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/R/FunctionsForPackage09242019.R")
+```
+
+```{r data_read_in2, echo=TRUE, eval=FALSE}
+# Load the data sets and needed packages
+# call libraries
+library(SuperLearner)
+library(IPCWTMLE)
+data(simCYD14_twostage)
+data(simCYD15_twostage)
+```
+
+The data sets consist of 40 variables with 10,250 and 20,500 subjects, respectively.  For more details on the data sets, please see the documentation included in this package.
+
+```{r data_summary}
+dim(simCYD14_twostage)
+dim(simCYD15_twostage)
+```
+
+For this analysis, combine data sets.  
+
+```{r data_summary2}
+dat <- rbind(simCYD14_twostage,simCYD15_twostage)
+dim(dat)
+```
+
+To address the qustion of interest, code the geometric mean titer to above and below median value for each data set.
+
+```{r data_summary3, eval=TRUE}
+dat$A <- ifelse(dat$M13_PRNT_SeroAverage >= median(dat$M13_PRNT_SeroAverage),1,0)
+```
+
+Then select the input variables for the IPCW-TMLE approach and define a formula for the BH approach:
+
+
+```{r data_summary4, eval=TRUE}
+SL.W <- c("VACC","AGEYRS","MALE","MYS","IDN","THA","VNM","COL","HND","PRI", "MEX","M13_MNv2_SeroAverage" )
+fmla = as.formula(paste("VCD ~ A + factor(VACC) + AGEYRS + MALE + MYS + IDN + THA + VNM + COL + HND + PRI + MEX"))
+
+```
+
+## IPCW-TMLE Estimation
+Run the main IPCW-TMLE function to estimate the marginal additive difference, marginal relative risk, and marginal log odds ratio.  See package documentation for further details on the inputs.
+
+```{r data_summary5, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
+out <- weighted.tmle.separate(w=dat[,SL.W], 
+                       a=dat$A, 
+                       y=dat$VCD, 
+                       delta=dat$delta, 
+                       Q.SL.library=c("SL.mean","SL.glm" ), #,"SL.step","SL.glmnet"), 
+                       g.SL.library=c("SL.mean","SL.glm"), 
+                       wgts=dat$weight,
+                       max.wgt = Inf)
+```
+
+### Output the desired estimates
+Estimated means and confidence intervals for $E[E[Y|A=1,W]]$ and $E[E[Y|A=0,W]]$:
+```{r outputresults, eval=TRUE}
+paste0("EY1: ",round(out$EY1,3),"; 95% CI: (",round(out$ci1[1],3),",",round(out$ci1[2],3) ,")")
+paste0("EY0: ",round(out$EY0,3),"; 95% CI: (",round(out$ci0[1],3),",",round(out$ci0[2],3) ,")")
+```
+
+Estimates and confidence intervals for the marginalized risk difference, marginalized risk ratio, and marginalized odds ratio:
+```{r outputresults2, eval=TRUE}
+paste0("Risk Difference: ",round(out$est.RiskDiff,3),"; 95% CI: (",round(out$ci.RiskDiff[1],3),",",round(out$ci.RiskDiff[2],3) ,")")
+paste0("RR: ",round(out$est.RR,3),"; 95% CI: (",round(out$ci.rr[1],3),",",round(out$ci.rr[2],3) ,")")
+paste0("OR: ",round(out$est.OR,3),"; 95% CI: (",round(out$ci.OR[1],3),",",round(out$ci.OR[2],3) ,")")
+
+```
+
+If only the IPCW-TMLE of the predicted values are desired, the *weighted.tmle.predicted.values* function can be used:
+
+```{r data_summary6, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
+out.fitted <- weighted.tmle.predicted.values(w=dat[,SL.W], 
+                       a=dat$A, 
+                       y=dat$VCD, 
+                       delta=dat$delta, 
+                       Q.SL.library=c("SL.mean","SL.glm"), 
+                       g.SL.library=c("SL.mean"), 
+                       wgts=dat$weight,
+                       max.wgt = Inf)
+```
+
+The resulting "fitted.values" are the IPCW-TMLE fitted values. 
+
+```{r data_summary7, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
+head(out.fitted$fitted.values)
+```
+
+
+## Breslow-Holubkov Estimation for Comparison
+
+For application of the Breslow-Holubkov approach for estimation in two-phase studies, the "tps" function from the \textit{osDesign} package can be used along with some additional steps utilizing the delta method to obtain the same estimates.  
+
+```{r data_summary8, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
+# Make sure osDesign is loaded
+  if (!require(osDesign)) install.packages('osDesign')
+  library(osDesign)
+# Phase I counts for use in the tps function
+nn0<-c(sum(dat$weight[dat$VCD==0 &dat$VACC==0]),sum(dat$weight[dat$VCD==0 &dat$VACC==1]))
+nn1<-c(sum(dat$weight[dat$VCD==1 &dat$VACC==0]),sum(dat$weight[dat$VCD==1 &dat$VACC==1]))
+
+# osDesign requires the stratification variable to be coded 1,2,..K for K strata
+dat$S <- dat$VACC + 1
+    
+# using osDesign package, calculate the BH estimator ("method='ML'")
+# using only the phase 2 sample of data, but includeing the phase 1 counts as nn0 and nn1
+dat.2 <- dat[dat$delta==1,]
+tps.fit <- tps(fmla, data=dat.2, nn0=nn0, nn1=nn1, group=dat.2$VACC, method="ML")
+  
+## output the corresponding estimates for the BH approach
+out.BH <- BH.Estimates(fmla=fmla,dat=dat,tps.fit=tps.fit)
+
+out.BH
+```
+
+
+
+## The end
