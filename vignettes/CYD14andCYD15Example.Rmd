@@ -7,26 +7,7 @@ vignette: >
   %\VignetteIndexEntry{IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
-  
-references:
-- id: Price2019
-  title: Comparing targeted minimum loss-based and Breslow-Holubkov methodology for two-phase sampling data designs
-  author:
-  - family: Price
-    given: Brenda
-  container-title: Statistical Communications in Infectious Diseases
-  volume: 99
-  URL: 'http://unknown'
-  DOI: unknown
-  issue: x
-  publisher: De Gruyater
-  page: x-x
-  type: article-journal
-  issued:
-    year: 2019
-    month: 12  
-    
-
+bibliography: ["/Users/brendaprice/Documents/Dissertation/ReferencesUsedinIPCWTMLepkgVignette.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -35,13 +16,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary
 
-This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach in @Price2019.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.
+This vignette demonstrates the application of IPCW-TMLE to data sets simulated to mimic two phase 3 clinical trials investigating the vaccine efficacy of a dengue vaccine using the approach in @Price2020.  For comparison, the Breslow-Holubkov approach for two-phase sampling estimation is also demonstrated.
 
 ## Introduction
 ## Data set
-Two randomized, double-blinded, placebo-controlled, multicenter, Phase 3 trials of the identical recombinant, live, attenuated, tetravalent dengue vaccine (CYD-TDV) versus placebo were conducted in Asia (Capeding et al. (2014)\nocite{Capedingetal2014}) and Latin America (Villar et al. (2015)\nocite{Villaretal2015}). These trials--labeled CYD14 and CYD15--randomized 10,275 and 20,869 children, respectively, in 2:1 allocation to vaccine:placebo, with immunizations administered at months 0, 6, and 12.  The primary analyses assessed vaccine efficacy ($VE$) against symptomatic, virologically confirmed dengue (VCD) occurring at least 28 days after the third immunization through to the Month 25 visit. Based on a proportional hazards model, estimated $VE$ was 56.5\% (95\% CI 43.8--66.4) for CYD14 and 64.7\% (95\% CI 58.7--69.8) for CYD15.
+Two randomized, double-blinded, placebo-controlled, multicenter, Phase 3 trials of the identical recombinant, live, attenuated, tetravalent dengue vaccine (CYD-TDV) versus placebo were conducted in Asia (@Capedingetal2014) and Latin America (@Villaretal2015). These trials--labeled CYD14 and CYD15--randomized 10,275 and 20,869 children, respectively, in 2:1 allocation to vaccine:placebo, with immunizations administered at months 0, 6, and 12.  The primary analyses assessed vaccine efficacy ($VE$) against symptomatic, virologically confirmed dengue (VCD) occurring at least 28 days after the third immunization through to the Month 25 visit. Based on a proportional hazards model, estimated $VE$ was 56.5\% (95\% CI 43.8--66.4) for CYD14 and 64.7\% (95\% CI 58.7--69.8) for CYD15.
 
-The trials measured neutralizing antibody titers to each of the four dengue serotypes contained in the CYD-TDV vaccine at baseline and at Month 13. These titers were measured via case-cohort sampling performed as Bernoulli random samples of all randomized participants at enrollment and additionally from all participants who experienced the VCD endpoint after Month 13 and by Month 25 (cases).  An individual's Month 13 log10-transformed geometric mean titer to the four vaccine-strain serotypes (``M13 average titer") has been studied as a biomarker of dengue risk and vaccine efficacy in secondary analyses (Vigne et al. (2017)\nocite{Vigne2017}, Moodie et al. (2018)\nocite{Moodieetal2018}, Sridhar et al. (2018)\nocite{Sridhar2018}), and for this example we study this marker as our phase 2 variable of interest. 
+The trials measured neutralizing antibody titers to each of the four dengue serotypes contained in the CYD-TDV vaccine at baseline and at Month 13. These titers were measured via case-cohort sampling performed as Bernoulli random samples of all randomized participants at enrollment and additionally from all participants who experienced the VCD endpoint after Month 13 and by Month 25 (cases).  An individual's Month 13 log10-transformed geometric mean titer to the four vaccine-strain serotypes (``M13 average titer") has been studied as a biomarker of dengue risk and vaccine efficacy in secondary analyses (@Vigne2017, @Moodieetal2018, @Sridhar2018), and for this example we study this marker as our phase 2 variable of interest. 
 
 ## Simulated Data Sets
 For this Vignette, we will not use the actual data from these vaccine trials, but data that has been simulated to be similar in distribution to the actual vaccine trial data.  These simulated data sets are included in this package under the names "simCYD14_twostage.RData" and "simCYD15_twostage.RData".  The outcome for the clinical trials is virally confirmed dengue (VCD), coded in the data sets as 1 for VCD and 0 otherwise.  Covariates adjusted for in the models include age, gender, and country.  The phase two sample is taken as a stratified sample based on outcome (VCD or no-VCD) and vaccination status (vaccine or placebo), and is coded for in the data set as delta=1 for phase 2 selection (0 otherwise).  Individual observation level weights reflect the probability of sampling to phase two.  For this analysis, the data sets are combined.  Further details on the data sets can be found in the package documentation under "simCYD14_twostage" and "simCYD15_twostage".
@@ -179,4 +160,3 @@ out.BH
 
 # References
 
-## The end
