@@ -91,7 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data</h1>
 <h4 class="author"><em>Brenda Price</em></h4>
-<h4 class="date"><em>27 September, 2019</em></h4>
+<h4 class="date"><em>29 September, 2019</em></h4>
 
 
 
@@ -160,11 +160,11 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
 <pre><code>## [1] &quot;EY0: 0.038; 95% CI: (0.032,0.044)&quot;</code></pre>
 <p>Estimates and confidence intervals for the marginalized risk difference, marginalized risk ratio, and marginalized odds ratio:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;Risk Difference: &quot;</span>,<span class="kw">round</span>(out$est.RiskDiff,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.RiskDiff[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.RiskDiff[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;Risk Difference: -0.027; 95% CI: (-0.033,-0.022)&quot;</code></pre>
+<pre><code>## [1] &quot;Risk Difference: -0.028; 95% CI: (-0.033,-0.022)&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;RR: &quot;</span>,<span class="kw">round</span>(out$est.RR,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.rr[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.rr[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;RR: 0.279; 95% CI: (0.186,0.418)&quot;</code></pre>
+<pre><code>## [1] &quot;RR: 0.278; 95% CI: (0.186,0.415)&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;OR: &quot;</span>,<span class="kw">round</span>(out$est.OR,<span class="dv">3</span>),<span class="st">&quot;; 95% CI: (&quot;</span>,<span class="kw">round</span>(out$ci.OR[<span class="dv">1</span>],<span class="dv">3</span>),<span class="st">&quot;,&quot;</span>,<span class="kw">round</span>(out$ci.OR[<span class="dv">2</span>],<span class="dv">3</span>) ,<span class="st">&quot;)&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;OR: 0.382; 95% CI: (0.254,0.575)&quot;</code></pre>
+<pre><code>## [1] &quot;OR: 0.379; 95% CI: (0.252,0.57)&quot;</code></pre>
 <p>If only the IPCW-TMLE of the predicted values are desired, the <em>weighted.tmle.predicted.values</em> function can be used:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out.fitted &lt;-<span class="st"> </span><span class="kw">weighted.tmle.predicted.values</span>(<span class="dt">w=</span>dat[,SL.W], 
                        <span class="dt">a=</span>dat$A, 
@@ -176,7 +176,7 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
                        <span class="dt">max.wgt =</span> <span class="ot">Inf</span>)</code></pre></div>
 <p>The resulting “fitted.values” are the IPCW-TMLE fitted values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(out.fitted$fitted.values)</code></pre></div>
-<pre><code>[1] 0.05155352 0.01887388 0.04219149 0.06344108 0.06620216 0.04299685</code></pre>
+<pre><code>[1] 0.05136514 0.01848770 0.04194332 0.06333224 0.06611237 0.04275373</code></pre>
 </div>
 </div>
 <div id="breslow-holubkov-estimation-for-comparison" class="section level2">
