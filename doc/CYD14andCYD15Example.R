@@ -6,8 +6,10 @@ knitr::opts_chunk$set(echo = TRUE)
 load("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/data/simCYD14_twostage.RData")
 load("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/data/simCYD15_twostage.RData")
 source("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/R/FunctionsForPackage09242019.R")
+set.seed(1234)
 
 ## ----data_read_in2, echo=TRUE, eval=FALSE--------------------------------
+#  set.seed(1234)
 #  # Load the data sets and needed packages
 #  # call libraries
 #  library(SuperLearner)
