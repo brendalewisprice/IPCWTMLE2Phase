@@ -49,7 +49,7 @@ source("/Users/brendaprice/Documents/Dissertation/IPCWTMLE/R/FunctionsForPackage
 # Load the data sets and needed packages
 # call libraries
 library(SuperLearner)
-library(IPCWTMLE)
+library(IPCWTMLE2Phase)
 data(simCYD14_twostage)
 data(simCYD15_twostage)
 ```
