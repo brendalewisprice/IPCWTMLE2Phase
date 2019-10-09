@@ -91,7 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data</h1>
 <h4 class="author"><em>Brenda Price</em></h4>
-<h4 class="date"><em>08 October, 2019</em></h4>
+<h4 class="date"><em>09 October, 2019</em></h4>
 
 
 
@@ -113,7 +113,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="analysis-approach" class="section level3">
 <h3>Analysis Approach</h3>
 <p>IPCW-TMLE methodology is applied to assess the association of M13 average titer with the subsequent risk of VCD through Month 25 (variable “VCD”). We investigate how the risk of VCD compares between vaccine recipients with above median versus below median values of M13 average titer (“M13_PRNT_SeroAverage”), coded below as <span class="math inline">\(A=1\)</span> and <span class="math inline">\(A=0\)</span> respectively. Our parameters of interest are the two marginalized risks <span class="math inline">\(\Psi_1 = E[E(Y=1|A=1,X)]\)</span> and <span class="math inline">\(\Psi_0 = E[E(Y=1|A=0,X)]\)</span>, where <span class="math inline">\(X\)</span> represents the phase 1 baseline covariates age, gender, and country of origin. We also are interested in specified contrasts <span class="math inline">\(\theta = h(\Psi_1,\Psi_0)\)</span> such as the marginalized risk difference (<span class="math inline">\(\theta =\Psi_1-\Psi_0\)</span>), the relative marginalized risk <span class="math inline">\(\theta = \Psi_1 / \Psi_0\)</span>, the relative marginalized odds ratio <span class="math inline">\(\theta = \Psi_1/(1-\Psi_1) / \Psi_0/(1-\Psi_0)\)</span>,</p>
-<p>IPCW-TMLE estimates of <span class="math inline">\(\Psi_1\)</span>, <span class="math inline">\(\Psi_0\)</span>, and <span class="math inline">\(\theta\)</span> are obtained using the methods described in Price and Gilbert (2020), and Breslow-Holubkov estimates are obtained using the “tps” function from the package .</p>
+<p>IPCW-TMLE estimates of <span class="math inline">\(\Psi_1\)</span>, <span class="math inline">\(\Psi_0\)</span>, and <span class="math inline">\(\theta\)</span> are obtained using the methods described in Price and Gilbert (2020), and Breslow-Holubkov estimates are obtained using the “tps” function from the package <em>osDesign</em>.</p>
 </div>
 </div>
 <div id="first-load-and-prepare-the-data" class="section level2">
@@ -182,7 +182,7 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
 </div>
 <div id="breslow-holubkov-estimation-for-comparison" class="section level2">
 <h2>Breslow-Holubkov Estimation for Comparison</h2>
-<p>For application of the Breslow-Holubkov approach for estimation in two-phase studies, the “tps” function from the  package can be used along with some additional steps utilizing the delta method to obtain the same estimates.</p>
+<p>For application of the Breslow-Holubkov approach for estimation in two-phase studies, the “tps” function from the <em>osDesign</em> package can be used along with some additional steps utilizing the delta method to obtain the same estimates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make sure osDesign is loaded</span>
   if (!<span class="kw">require</span>(osDesign)) <span class="kw">install.packages</span>(<span class="st">'osDesign'</span>)
   <span class="kw">library</span>(osDesign)

@@ -31,7 +31,7 @@ For this Vignette, we will not use the actual data from these vaccine trials, bu
 IPCW-TMLE methodology is applied to assess the association of M13 average titer with the subsequent risk of VCD through Month 25 (variable "VCD"). We investigate how the risk of VCD compares between vaccine recipients with above median versus below median values of M13 average titer ("M13_PRNT_SeroAverage"), coded below as $A=1$ and $A=0$ respectively. Our parameters of interest are the two marginalized risks $\Psi_1 = E[E(Y=1|A=1,X)]$ and $\Psi_0 = E[E(Y=1|A=0,X)]$, where $X$ represents the phase 1 baseline covariates 
 age, gender, and country of origin.   We also are interested in specified contrasts $\theta = h(\Psi_1,\Psi_0)$ such as the marginalized risk difference ($\theta =\Psi_1-\Psi_0$), the relative marginalized risk $\theta = \Psi_1 / \Psi_0$, the relative marginalized odds ratio $\theta = \Psi_1/(1-\Psi_1) / \Psi_0/(1-\Psi_0)$, 
 
-IPCW-TMLE estimates of $\Psi_1$, $\Psi_0$, and $\theta$ are obtained using the methods described in Price and Gilbert (2020), and Breslow-Holubkov estimates are obtained using the "tps" function from the package \textit{osDesign}.
+IPCW-TMLE estimates of $\Psi_1$, $\Psi_0$, and $\theta$ are obtained using the methods described in Price and Gilbert (2020), and Breslow-Holubkov estimates are obtained using the "tps" function from the package _osDesign_.
 
 ## First, load and prepare the data
 
@@ -135,7 +135,7 @@ head(out.fitted$fitted.values)
 
 ## Breslow-Holubkov Estimation for Comparison
 
-For application of the Breslow-Holubkov approach for estimation in two-phase studies, the "tps" function from the \textit{osDesign} package can be used along with some additional steps utilizing the delta method to obtain the same estimates.  
+For application of the Breslow-Holubkov approach for estimation in two-phase studies, the "tps" function from the _osDesign_ package can be used along with some additional steps utilizing the delta method to obtain the same estimates.  
 
 ```{r data_summary8, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
 # Make sure osDesign is loaded
