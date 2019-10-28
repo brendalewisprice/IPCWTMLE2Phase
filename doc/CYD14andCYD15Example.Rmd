@@ -50,7 +50,7 @@ set.seed(1234)
 # Load the data sets and needed packages
 # call libraries
 library(SuperLearner)
-library(IPCWTMLE)
+library(IPCWTMLE2Phase)
 data(simCYD14_twostage)
 data(simCYD15_twostage)
 ```
@@ -135,7 +135,7 @@ head(out.fitted$fitted.values)
 
 ## Breslow-Holubkov Estimation for Comparison
 
-For application of the Breslow-Holubkov approach for estimation in two-phase studies, the "tps" function from the _osDesign_ package can be used along with some additional steps utilizing the delta method to obtain the same estimates.  
+For application of the Breslow-Holubkov approach for estimation in two-phase studies, the "tps" function from the _osDesign_ package (@HaneuseSaegusaLumley2011) can be used along with some additional steps utilizing the delta method to obtain the same estimates.  
 
 ```{r data_summary8, eval=TRUE,comment=NA, message=FALSE, warning=FALSE}
 # Make sure osDesign is loaded

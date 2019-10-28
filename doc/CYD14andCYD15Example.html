@@ -91,7 +91,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">IPCWTMLE Example Using Simulated CYD14 and CYD15 Two-Phase Data</h1>
 <h4 class="author"><em>Brenda Price</em></h4>
-<h4 class="date"><em>09 October, 2019</em></h4>
+<h4 class="date"><em>28 October, 2019</em></h4>
 
 
 
@@ -123,7 +123,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co"># Load the data sets and needed packages</span>
 <span class="co"># call libraries</span>
 <span class="kw">library</span>(SuperLearner)
-<span class="kw">library</span>(IPCWTMLE)
+<span class="kw">library</span>(IPCWTMLE2Phase)
 <span class="kw">data</span>(simCYD14_twostage)
 <span class="kw">data</span>(simCYD15_twostage)</code></pre></div>
 <p>The data sets consist of 40 variables with 10,250 and 20,500 subjects, respectively. For more details on the data sets, please see the documentation included in this package.</p>
@@ -182,7 +182,7 @@ fmla =<span class="st"> </span><span class="kw">as.formula</span>(<span class="k
 </div>
 <div id="breslow-holubkov-estimation-for-comparison" class="section level2">
 <h2>Breslow-Holubkov Estimation for Comparison</h2>
-<p>For application of the Breslow-Holubkov approach for estimation in two-phase studies, the “tps” function from the <em>osDesign</em> package can be used along with some additional steps utilizing the delta method to obtain the same estimates.</p>
+<p>For application of the Breslow-Holubkov approach for estimation in two-phase studies, the “tps” function from the <em>osDesign</em> package (<span class="citation">Haneuse, Saegusa, and Lumley (2011)</span>) can be used along with some additional steps utilizing the delta method to obtain the same estimates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make sure osDesign is loaded</span>
   if (!<span class="kw">require</span>(osDesign)) <span class="kw">install.packages</span>(<span class="st">'osDesign'</span>)
   <span class="kw">library</span>(osDesign)
